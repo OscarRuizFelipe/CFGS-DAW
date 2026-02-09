@@ -1,0 +1,96 @@
+1.-SELECT * FROM ARTICULOS 
+WHERE CIUDAD = 'CACERES';
+
+2.-SELECT DISTINCT P 
+FROM ENVIOS 
+WHERE T = 'T1';
+
+3.-SELECT DISTINCT COLOR, CIUDAD 
+FROM COMPONENTES;
+
+4,.SELECT T, CIUDAD 
+FROM ARTICULOS 
+WHERE CIUDAD LIKE '%D' OR CIUDAD LIKE '%E%';
+
+5.-SELECT DISTINCT P 
+FROM ENVIOS 
+WHERE T = 'T1' AND C = 'C1';
+
+6.-SELECT DISTINCT A.TNOMBRE 
+FROM ARTICULOS A
+JOIN ENVIOS E ON A.T = E.T
+WHERE E.P = 'P1'
+ORDER BY A.TNOMBRE ASC;
+
+7.-SELECT DISTINCT E.C 
+FROM ENVIOS E
+JOIN ARTICULOS A ON E.T = A.T
+WHERE A.CIUDAD = 'MADRID';
+
+8.-SELECT C 
+FROM COMPONENTES 
+WHERE PESO = (SELECT MIN(PESO) FROM COMPONENTES);
+
+9.-SELECT DISTINCT P 
+FROM ENVIOS 
+WHERE T = 'T1' 
+AND P IN (SELECT P FROM ENVIOS WHERE T = 'T2');
+
+10.-SELECT DISTINCT P 
+FROM ENVIOS 
+WHERE T = 'T1' 
+AND P IN (SELECT P FROM ENVIOS WHERE T = 'T2');
+SELECT DISTINCT E.P
+FROM ENVIOS E
+JOIN ARTICULOS A ON E.T = A.T
+JOIN COMPONENTES C ON E.C = C.C
+WHERE C.COLOR = 'ROJO' 
+AND A.CIUDAD IN ('SEVILLA', 'MADRID');
+
+11.-SELECT DISTINCT C 
+FROM ENVIOS 
+WHERE T IN (SELECT T FROM ARTICULOS WHERE CIUDAD = 'SEVILLA')
+AND P IN (SELECT P FROM PROVEEDORES WHERE CIUDAD = 'SEVILLA');
+
+
+25.-
+select distinct c.COLOR from componentes c, envios e
+where e.c = c.C
+and e.p='P1';
+--
+select c.color from componentes c
+where c.c IN(select distinct c from envios where p='P1');
+
+26.-
+select e.*, p.ciudad, c.CIUDAD, a.CIUDAD from articulos a,
+proveedores p, envios e, componentes c
+where a.t=e.T
+and e.p=p.P
+and c.c =e.c
+and p.Ciudad = a.CIUDAD
+and c.CIUDAD = p.CIUDAD;
+
+27.-
+select c, SYM(cantidad) from envios
+group by c;
+--
+select c.c, c.NOMBRE from componentes c where c IN(
+    select c from envios 
+    group by c
+    HAVING SUM(cantidad) > 1000);
+
+29.-
+SELELCT e.t from envios e INNER JOIN componentes c ON e.c = c.C
+group by t
+having count(distinct ciudad) = 1;
+
+30.-
+select t from envios
+group by T
+having count(distinct c) = (selectcount(*)from componentes);
+
+31.-
+select p, t from envios e NATURAL JOIN componentes c 
+where c.COLOR = 'ROJO'
+group by p, t
+having count(*) > 1;

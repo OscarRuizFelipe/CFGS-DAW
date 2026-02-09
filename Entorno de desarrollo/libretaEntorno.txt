@@ -1,0 +1,32 @@
+9/1/2026
+Versiones en fases de desarrollo/codificacion y pruebas
+pre-alfa
+alfa
+beta
+gamma
+delta...
+Version fase de producción/despliegue
+produccion
+--------------------
+plan->analis->diseñ->cod->prue->despl->mant
+
+pruebas -> cajablanca/caja negra -> encargadas de las pruebas -> varios departamentos (QA & QC)
+Garantía de calidad se encarga de la fase de pruebas y el control de calidad son los encargados del
+mantenimiento.
+
+---------
+pruebas de caja blanca:
+-De cubrimiento
+-De condiciones
+-De bucles
+
+pruebas de caja negra:
+-De clases de equivalencia de datos
+-De valores límites
+-De interfaces
+
+-----------
+Criterios para evaluar la calidad de sw(benchmark):
+-Pruebas de carga.
+-Pruebas de estrés.
+-Pruebas de estabilidad.

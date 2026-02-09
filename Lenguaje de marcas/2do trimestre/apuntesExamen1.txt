@@ -1,0 +1,45 @@
+REPASO: PSEUDO-CLASES Y PSEUDO-ELEMENTOS
+============================================================
+
+1. DEFINICIONES BÁSICAS
+------------------------------------------------------------
+* Pseudo-clase (:): Describe un estado especial o posición de un 
+elemento (cómo/dónde está).
+* Pseudo-elemento (::): Describe una parte concreta de un elemento 
+o añade contenido (primera letra, antes/después).
+
+2. PSEUDO-CLASES PRINCIPALES (Interacción y Estado)
+------------------------------------------------------------
+* :link           - Enlace no visitado.
+* :visited        - Enlace ya visitado.
+* :hover          - Cuando el ratón está encima del elemento.
+* :active         - Mientras se está haciendo clic.
+* :focus          - Elemento con el foco actual (clic o teclado).
+* :checked        - Checkbox o radio seleccionado.
+* :valid/:invalid - El valor cumple o no las restricciones del formulario.
+* :lang(xx)       - Selecciona elementos por su atributo de idioma.
+3. PSEUDO-CLASES ESTRUCTURALES (Posición)
+------------------------------------------------------------
+* :first-child    - Selecciona el primer hijo de su padre.
+* :last-child     - Selecciona el último hijo de su padre.
+* :nth-child(n)   - Selecciona el hijo en la posición 'n'
+* :first-of-type  - Primer elemento de su tipo entre sus hermanos.
+* :only-child     - Selecciona si es el único hijo que tiene el padre.
+
+4. PSEUDO-ELEMENTOS (Partes y Contenido Generado)
+------------------------------------------------------------
+* ::before        - Inserta contenido ANTES del contenido del elemento.
+* ::after         - Inserta contenido DESPUÉS del contenido del elemento.
+* ::first-letter  - Estiliza la primera letra de un bloque.
+* ::first-line    - Estiliza la primera línea de un bloque.
+* ::selection     - Estiliza el texto seleccionado por el usuario.
+* ::placeholder   - Estiliza el texto de ayuda dentro de un input.
+* ::marker        - Estiliza el marcador de una lista (viñetas/números).
+
+5. REGLAS IMPORTANTES
+------------------------------------------------------------
+* Los pseudo-elementos ::before y ::after requieren obligatoriamente la propiedad 'content'.
+* Sintaxis moderna: Un colon (:) para clases, dos colones (::) para elementos.
+* root se refiere al elemento raíz (normalmente <html>) y es muy usado para variables.
+
+============================================================
