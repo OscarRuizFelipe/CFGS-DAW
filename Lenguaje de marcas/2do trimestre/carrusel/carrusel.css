@@ -1,0 +1,83 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { display: flex; justify-content: center; padding: 50px; background: #f4f4f4; }
+
+.contenedor {
+    width: 600px;
+    position: relative; /* Necesario para posicionar las flechas */
+}
+
+/* --- ESTO PERMITE EL DESLIZAMIENTO MANUAL --- */
+.carrusel {
+    display: flex;
+    overflow-x: auto;           /* Activa el scroll horizontal (deslizar) */
+    scroll-snap-type: x mandatory; /* Fuerza a que la imagen se imante al soltar */
+    scroll-behavior: smooth;    /* Hace que el movimiento sea fluido */
+    list-style: none;
+    height: 350px;
+    background: #000;
+    scrollbar-width: none;      /* Oculta scrollbar en Firefox */
+}
+
+/* Ocultar scrollbar en Chrome/Safari */
+.carrusel::-webkit-scrollbar { display: none; }
+
+.carrusel li {
+    flex: 0 0 100%;             /* Cada foto ocupa todo el ancho */
+    scroll-snap-align: center;  /* Punto exacto donde se detiene el deslizamiento */
+}
+
+.carrusel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;       /* Evita que el arrastre de imagen interfiera con el scroll */
+}
+
+/* --- EL MARCO Y LOS BOTONES --- */
+.botonera-marco {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;           /* Color del marco */
+    padding: 12px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* Estilo común para los 4 botones */
+.btn, 
+.carrusel::scroll-button(left), 
+.carrusel::scroll-button(right) {
+    width: 95px;
+    padding: 10px 0;
+    background: #fff;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+}
+
+/* Reserva del espacio central para Izquierda y Derecha */
+.espacio-centro { width: 200px; }
+
+/* Posicionar Izquierda y Derecha dentro del marco de forma absoluta */
+.carrusel::scroll-button(left),
+.carrusel::scroll-button(right) {
+    position: absolute;
+    bottom: 12px; /* Alineado con el padding de la botonera */
+}
+
+.carrusel::scroll-button(left) {
+    content: "Izquierda";
+    left: calc(50% - 100px); /* Centro - mitad del espacio */
+}
+
+.carrusel::scroll-button(right) {
+    content: "Derecha";
+    left: calc(50% + 5px);   /* Centro + margen */
+}
