@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrusel Deslizable Minimalista</title>
+    <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { display: flex; justify-content: center; padding: 50px; background: #f4f4f4; }
+
+.contenedor {
+    width: 600px;
+    position: relative; /* Necesario para posicionar las flechas */
+}
+
+.carrusel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    list-style: none;
+    height: 350px;
+    background: #000;
+    scrollbar-width: none;
+}
+
+.carrusel::-webkit-scrollbar { display: none; }
+
+.carrusel li {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+}
+
+.carrusel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.botonera-marco {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    padding: 12px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.btn, 
+.carrusel::scroll-button(left), 
+.carrusel::scroll-button(right) {
+    width: 95px;
+    padding: 10px 0;
+    background: #fff;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+}
+
+.espacio-centro { width: 200px; }
+
+.carrusel::scroll-button(left),
+.carrusel::scroll-button(right) {
+    position: absolute;
+    bottom: 12px;
+}
+
+.carrusel::scroll-button(left) {
+    content: "Izquierda";
+    left: calc(50% - 100px);
+}
+
+.carrusel::scroll-button(right) {
+    content: "Derecha";
+    left: calc(50% + 5px);
+}
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <ul class="carrusel">
+            <li id="p1"><img src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d" alt="1"></li>
+            <li><img src="https://images.unsplash.com/photo-1517649763962-0c623066013b" alt="2"></li>
+            <li><img src="https://images.unsplash.com/photo-1518611012118-f0c5d1f1b6f9" alt="3"></li>
+            <li><img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c" alt="4"></li>
+            <li><img src="https://images.unsplash.com/photo-1502810190503-830027c1a7e8" alt="5"></li>
+            <li><img src="https://images.unsplash.com/photo-1505842465776-3d90f616310d" alt="6"></li>
+            <li><img src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d" alt="7"></li>
+            <li><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470" alt="8"></li>
+            <li><img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb" alt="9"></li>
+            <li id="p10"><img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d" alt="10"></li>
+        </ul>
+
+        <nav class="botonera-marco">
+            <a href="#p1" class="btn">Principio</a>
+            <div class="espacio-centro"></div> 
+            <a href="#p10" class="btn">Final</a>
+        </nav>
+    </div>
+
+</body>
+</html>
