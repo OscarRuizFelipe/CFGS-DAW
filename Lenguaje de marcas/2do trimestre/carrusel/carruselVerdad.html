@@ -71,16 +71,16 @@ body { display: flex; justify-content: center; padding: 50px; background: #f4f4f
 
 <div class="contenedor">
     <ul class="carrusel" id="carrusel">
-        <li><img src="https://plus.unsplash.com/premium_photo-1661868926397-0083f0503c07?w=500" alt="1"></li>
-        <li><img src="https://plus.unsplash.com/premium_photo-1671489203034-fc619a2de3bf?w=500" alt="2"></li>
-        <li><img src="https://images.unsplash.com/photo-1610736342165-4eeb4aef66ca?w=500" alt="3"></li>
-        <li><img src="https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=500" alt="4"></li>
-        <li><img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=500" alt="5"></li>
-        <li><img src="https://images.unsplash.com/photo-1434648957308-5e6a859697e8?w=500" alt="6"></li>
-        <li><img src="https://images.unsplash.com/photo-1605002713581-123e77bcf83d?w=500" alt="7"></li>
-        <li><img src="https://images.unsplash.com/photo-1570498839593-e565b39455fc?w=500" alt="8"></li>
-        <li><img src="https://images.unsplash.com/photo-1511426463457-0571e247d816?w=500" alt="9"></li>
-        <li><img src="https://images.unsplash.com/photo-1607627000458-210e8d2bdb1d?w=500" alt="10"></li>
+        <li><img src="https://plus.unsplash.com/premium_photo-1661868926397-0083f0503c07?w=500" alt="botas con balon"></li>
+        <li><img src="https://plus.unsplash.com/premium_photo-1671489203034-fc619a2de3bf?w=500" alt="campo de futbol"></li>
+        <li><img src="https://images.unsplash.com/photo-1610736342165-4eeb4aef66ca?w=500" alt="jugador de futbol"></li>
+        <li><img src="https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=500" alt="disputa de balon"></li>
+        <li><img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=500" alt="celebracion de gol"></li>
+        <li><img src="https://images.unsplash.com/photo-1434648957308-5e6a859697e8?w=500" alt="estadio entero"></li>
+        <li><img src="https://images.unsplash.com/photo-1605002713581-123e77bcf83d?w=500" alt="mural maradona"></li>
+        <li><img src="https://images.unsplash.com/photo-1570498839593-e565b39455fc?w=500" alt="foto del futbol"></li>
+        <li><img src="https://images.unsplash.com/photo-1511426463457-0571e247d816?w=500" alt="botas en el aire"></li>
+        <li><img src="https://images.unsplash.com/photo-1607627000458-210e8d2bdb1d?w=500" alt="jugador bajo los asperzores"></li>
     </ul>
 
     <nav class="botonera-marco">
@@ -93,36 +93,36 @@ body { display: flex; justify-content: center; padding: 50px; background: #f4f4f
 </div>
 
 <script>
-// Variables
+
 const carrusel = document.getElementById('carrusel');
 const imgs = carrusel.querySelectorAll('li img');
 const body = document.body;
 
 let index = 0;
 
-// Colores de fondo
+
 const colors = ["#ffb3b3","#5a3232","#1f1d1d","#1a0202","#2ddd09","#31c7bf","#1316a5","#ac16c088","#ac14ac","#cccccc"];
 
-// Actualiza fondo
+
 function updateBackground() {
     body.style.background = colors[index];
 }
 
-// Flecha izquierda
+
 document.getElementById('left').addEventListener('click', () => {
     index = Math.max(0, index - 1);
     imgs[index].scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
     updateBackground();
 });
 
-// Flecha derecha
+
 document.getElementById('right').addEventListener('click', () => {
     index = Math.min(imgs.length -1, index + 1);
     imgs[index].scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
     updateBackground();
 });
 
-// Botón Principio
+
 document.getElementById('first').addEventListener('click', (e)=>{
     e.preventDefault();
     index = 0;
@@ -130,7 +130,7 @@ document.getElementById('first').addEventListener('click', (e)=>{
     updateBackground();
 });
 
-// Botón Final
+
 document.getElementById('last').addEventListener('click', (e)=>{
     e.preventDefault();
     index = imgs.length -1;
@@ -138,7 +138,7 @@ document.getElementById('last').addEventListener('click', (e)=>{
     updateBackground();
 });
 
-// Inicializar fondo
+
 updateBackground();
 </script>
 
