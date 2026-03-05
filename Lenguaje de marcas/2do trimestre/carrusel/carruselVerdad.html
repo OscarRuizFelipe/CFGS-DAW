@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Carrusel Deslizable Minimalista</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="author" content="Oscar Ruiz Felipe">
+<title>Carrusel Deportivo Manolo</title>
+<style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { display: flex; justify-content: center; padding: 50px; background: #f4f4f4; }
+body { display: flex; justify-content: center; padding: 50px; background: #f4f4f4; transition: background 0.5s; }
 
 .contenedor {
     width: 600px;
-    position: relative; /* Necesario para posicionar las flechas */
+    position: relative;
 }
 
 .carrusel {
@@ -45,11 +46,10 @@ body { display: flex; justify-content: center; padding: 50px; background: #f4f4f
     padding: 12px;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+    margin-top: 10px;
 }
 
-.btn, 
-.carrusel::scroll-button(left), 
-.carrusel::scroll-button(right) {
+.btn, .arrow {
     width: 95px;
     padding: 10px 0;
     background: #fff;
@@ -64,47 +64,83 @@ body { display: flex; justify-content: center; padding: 50px; background: #f4f4f
     border: none;
 }
 
-.espacio-centro { width: 200px; }
-
-.carrusel::scroll-button(left),
-.carrusel::scroll-button(right) {
-    position: absolute;
-    bottom: 12px;
-}
-
-.carrusel::scroll-button(left) {
-    content: "Izquierda";
-    left: calc(50% - 100px);
-}
-
-.carrusel::scroll-button(right) {
-    content: "Derecha";
-    left: calc(50% + 5px);
-}
-    </style>
+.espacio-centro { width: 10px; }
+</style>
 </head>
 <body>
 
-    <div class="contenedor">
-        <ul class="carrusel">
-            <li id="p1"><img src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d" alt="1"></li>
-            <li><img src="https://images.unsplash.com/photo-1517649763962-0c623066013b" alt="2"></li>
-            <li><img src="https://images.unsplash.com/photo-1518611012118-f0c5d1f1b6f9" alt="3"></li>
-            <li><img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c" alt="4"></li>
-            <li><img src="https://images.unsplash.com/photo-1502810190503-830027c1a7e8" alt="5"></li>
-            <li><img src="https://images.unsplash.com/photo-1505842465776-3d90f616310d" alt="6"></li>
-            <li><img src="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d" alt="7"></li>
-            <li><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470" alt="8"></li>
-            <li><img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb" alt="9"></li>
-            <li id="p10"><img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d" alt="10"></li>
-        </ul>
+<div class="contenedor">
+    <ul class="carrusel" id="carrusel">
+        <li><img src="https://plus.unsplash.com/premium_photo-1661868926397-0083f0503c07?w=500" alt="1"></li>
+        <li><img src="https://plus.unsplash.com/premium_photo-1671489203034-fc619a2de3bf?w=500" alt="2"></li>
+        <li><img src="https://images.unsplash.com/photo-1610736342165-4eeb4aef66ca?w=500" alt="3"></li>
+        <li><img src="https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=500" alt="4"></li>
+        <li><img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=500" alt="5"></li>
+        <li><img src="https://images.unsplash.com/photo-1434648957308-5e6a859697e8?w=500" alt="6"></li>
+        <li><img src="https://images.unsplash.com/photo-1605002713581-123e77bcf83d?w=500" alt="7"></li>
+        <li><img src="https://images.unsplash.com/photo-1570498839593-e565b39455fc?w=500" alt="8"></li>
+        <li><img src="https://images.unsplash.com/photo-1511426463457-0571e247d816?w=500" alt="9"></li>
+        <li><img src="https://images.unsplash.com/photo-1607627000458-210e8d2bdb1d?w=500" alt="10"></li>
+    </ul>
 
-        <nav class="botonera-marco">
-            <a href="#p1" class="btn">Principio</a>
-            <div class="espacio-centro"></div> 
-            <a href="#p10" class="btn">Final</a>
-        </nav>
-    </div>
+    <nav class="botonera-marco">
+        <div class="arrow" id="left">&#10094; Izquierda</div>
+        <a href="#" class="btn" id="first">Principio</a>
+        <div class="espacio-centro"></div>
+        <a href="#" class="btn" id="last">Final</a>
+        <div class="arrow" id="right">Derecha &#10095;</div>
+    </nav>
+</div>
+
+<script>
+// Variables
+const carrusel = document.getElementById('carrusel');
+const imgs = carrusel.querySelectorAll('li img');
+const body = document.body;
+
+let index = 0;
+
+// Colores de fondo
+const colors = ["#ffb3b3","#5a3232","#1f1d1d","#1a0202","#2ddd09","#31c7bf","#1316a5","#ac16c088","#ac14ac","#cccccc"];
+
+// Actualiza fondo
+function updateBackground() {
+    body.style.background = colors[index];
+}
+
+// Flecha izquierda
+document.getElementById('left').addEventListener('click', () => {
+    index = Math.max(0, index - 1);
+    imgs[index].scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
+    updateBackground();
+});
+
+// Flecha derecha
+document.getElementById('right').addEventListener('click', () => {
+    index = Math.min(imgs.length -1, index + 1);
+    imgs[index].scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
+    updateBackground();
+});
+
+// Botón Principio
+document.getElementById('first').addEventListener('click', (e)=>{
+    e.preventDefault();
+    index = 0;
+    imgs[index].scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
+    updateBackground();
+});
+
+// Botón Final
+document.getElementById('last').addEventListener('click', (e)=>{
+    e.preventDefault();
+    index = imgs.length -1;
+    imgs[index].scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
+    updateBackground();
+});
+
+// Inicializar fondo
+updateBackground();
+</script>
 
 </body>
 </html>
