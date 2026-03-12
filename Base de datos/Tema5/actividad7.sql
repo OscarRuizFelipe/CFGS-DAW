@@ -8,7 +8,30 @@
 
 
 DELIMITER $$
-CREATE PROCEDURE ac07listEmpleadosConHijos()
+CREATE OR REPLACE PROCEDURE ac07listEmpleadosConHijos()
 BEGIN
-    SELECT * FROM empleados WHERE id_empleado IN (SELECT DISTINCT id_empleado FROM hijos);
+    SELECT * FROM empleado WHERE numHi > 0;
 END $$
+DELIMITER ;
+
+CALL ac07listEmpleadosConHijos();
+
+DELIMITER $$
+CREATE OR REPLACE PROCEDURE ac07contarEmpleados()
+BEGIN
+    SELECT COUNT(*) FROM empleado;
+END $$
+DELIMITER ;
+
+CALL ac07contarEmpleados();
+
+
+
+CALL ac07updSalarioEmpleados
+
+DELIMITER $$
+CREATE OR REPLACE PROCEDURE ac07updSalarioEmpleados()
+BEGIN
+    UPDATE empleado SET salEMP = salEMP * 1.1;
+END $$
+DELIMITER ;

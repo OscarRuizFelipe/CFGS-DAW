@@ -1,0 +1,19 @@
+/*En la base de datos empresa, crea:
+
+El procedimiento ac08listDepartamentos que liste los departamentos de un determinado centro.
+El procedimiento ac08listDepartamentosPlus que liste los departamentos de un centro, y en el caso de recibir como argumento un valor nulo, devuelva todos los departamentos.
+El procedimiento ac08updSalarioEmpleadosParam que incremente el salario de los empleados una determinada cantidad a partir de un parámetro de entrada.
+El procedimiento ac08contarEmpleados que devuelva la cantidad de empleados en un parámetro de salida.
+El procedimiento ac08contarEmpleadosDpto que devuelva la cantidad de empleados de un determinado departamento (introducido vía un parámetro de entrada) en un parámetro de salida.
+El procedimiento ac08sueldosSet que devuelva el sueldo menor, el mayor y el promedio de todos los empleados (usando SET).
+El procedimiento ac08sueldosSelectInto que devuelva el sueldo menor, el mayor y el promedio de todos los empleados (usando SELECT INTO).*/
+
+
+
+
+DELIMITER $$
+CREATE OR REPLACE PROCEDURE ac08listDepartamentos(IN p_CodCen INT)
+BEGIN
+    SELECT * FROM departamento WHERE codcen = p_CodCen;
+END $$
+DELIMITER ;
