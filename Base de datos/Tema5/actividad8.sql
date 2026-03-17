@@ -105,3 +105,5 @@ DELIMITER ;
 
 CALL ac08sueldosSet(@sueldoMenor, @sueldoMayor, @sueldoPromedio);
 SELECT @sueldoMenor, @sueldoMayor, @sueldoPromedio;
+
+
