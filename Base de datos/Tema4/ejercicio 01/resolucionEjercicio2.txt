@@ -21,3 +21,4 @@ CREATE OR REPLACE VIEW V_CLIENTES_VALENCIA AS SELECT idCliente, nombreCliente, c
 6. Elimina la vista V_PEDIDOS_DETALLADOS de la base de datos 
 
 DROP VIEW V_PEDIDOS_DETALLADOS;
+
