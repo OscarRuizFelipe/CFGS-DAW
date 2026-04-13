@@ -54,7 +54,7 @@ DELIMITER //
 CREATE PROCEDURE ac11actualizarColumnaEmail()
 BEGIN
    UPDATE alumnado
-   SET email = crearEmail(nombre, apellidos, curso);
+   SET email = crearEmail(nombre, apellidos, curso) where email IS NULL;
 END //
 DELIMITER ;
 --usa el prodedimiento para actualizar la columna email
