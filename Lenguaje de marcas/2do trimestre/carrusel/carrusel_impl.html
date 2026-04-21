@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="carrusel.css">
+    <title>Carrusel de imágenes</title>
+</head>
+
+<body>
+    <main>
+        <h1>Carrusel de imágenes</h1>
+
+        <div class="controls-external">
+            <button id="firstBtn" aria-label="Ir al primero">⏮️</button>
+            <button id="prevBtn" aria-label="Anterior">◀️</button>
+            <button id="nextBtn" aria-label="Siguiente">▶️</button>
+            <button id="lastBtn" aria-label="Ir al último">⏭️</button>
+        </div>
+
+        <div class="carousel" id="carousel" tabindex="0" aria-roledescription="carousel">
+            <ul class="carousel-track">
+                <li class="carousel-item"><img src="https://picsum.photos/id/1015/900/560" alt="Paisaje 1"></li>
+                <li class="carousel-item"><img src="https://picsum.photos/id/1016/900/560" alt="Paisaje 2"></li>
+                <li class="carousel-item"><img src="https://picsum.photos/id/1020/900/560" alt="Paisaje 3"></li>
+                <li class="carousel-item"><img src="https://picsum.photos/id/1024/900/560" alt="Paisaje 4"></li>
+                <li class="carousel-item"><img src="https://picsum.photos/id/1025/900/560" alt="Paisaje 5"></li>
+                <li class="carousel-item"><img src="https://picsum.photos/id/1035/900/560" alt="Paisaje 6"></li>
+                <li class="carousel-item"><img src="https://picsum.photos/id/1039/900/560" alt="Paisaje 7"></li>
+                <li class="carousel-item"><img src="https://picsum.photos/id/1043/900/560" alt="Paisaje 8"></li>
+                <li class="carousel-item"><img src="https://picsum.photos/id/1050/900/560" alt="Paisaje 9"></li>
+                <li class="carousel-item"><img src="https://picsum.photos/id/1060/900/560" alt="Paisaje 10"></li>
+            </ul>
+        </div>
+
+        <p class="note">Usa los botones externos para navegar: inicio, anterior, siguiente, final.</p>
+    </main>
+
+    <script>
+        (function(){
+            const track = document.querySelector('.carousel-track');
+            const items = Array.from(track.children);
+            const carousel = document.getElementById('carousel');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const firstBtn = document.getElementById('firstBtn');
+            const lastBtn = document.getElementById('lastBtn');
+
+            let currentIndex = 0;
+
+            function update() {
+                const width = carousel.clientWidth;
+                track.style.transform = `translateX(${-currentIndex * width}px)`;
+                track.setAttribute('data-current', currentIndex);
+            }
+
+            // Resize observer to keep the correct translation on viewport change
+            window.addEventListener('resize', update);
+
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) currentIndex--;
+                update();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentIndex < items.length - 1) currentIndex++;
+                update();
+            });
+
+            firstBtn.addEventListener('click', () => {
+                currentIndex = 0;
+                update();
+            });
+
+            lastBtn.addEventListener('click', () => {
+                currentIndex = items.length - 1;
+                update();
+            });
+
+            // Keyboard support: left/right arrows
+            carousel.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') prevBtn.click();
+                if (e.key === 'ArrowRight') nextBtn.click();
+                if (e.key === 'Home') firstBtn.click();
+                if (e.key === 'End') lastBtn.click();
+            });
+
+            // Make each item full-width by setting CSS variables on load
+            function setItemSizes(){
+                const width = carousel.clientWidth;
+                items.forEach(item => item.style.width = width + 'px');
+                track.style.width = (width * items.length) + 'px';
+            }
+
+            window.addEventListener('load', () => {
+                setItemSizes();
+                update();
+            });
+            window.addEventListener('resize', setItemSizes);
+        })();
+    </script>
+</body>
+</html>
