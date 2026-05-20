@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="Oscar Ruiz Felipe">
+<title>Carrusel Deportivo Manolo</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { 
+    display: flex; 
+    justify-content: center; 
+    padding: clamp(15px, 5vw, 50px); 
+    background: #f4f4f4; 
+    transition: background 0.5s; 
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.carrusel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    list-style: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10; 
+    background: #000;
+    scrollbar-width: none;
+}
+
+.carrusel::-webkit-scrollbar { display: none; }
+
+.carrusel li {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+}
+
+.carrusel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+}
+
+.botonera-marco {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    padding: 12px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    margin-top: 0px; 
+}
+
+.btn, .arrow {
+    flex: 1;
+    max-width: 110px;
+    padding: 10px 4px;
+    background: #fff;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: clamp(10px, 2.5vw, 12px);
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover, .arrow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+
+.btn:active, .arrow:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+.espacio-centro { width: 8px; }
+</style>
+</head>
+<body>
+
+<div class="contenedor">
+    <ul class="carrusel" id="carrusel">
+        <li><img src="https://plus.unsplash.com/premium_photo-1661868926397-0083f0503c07?w=800" alt="botas con balon"></li>
+        <li><img src="https://plus.unsplash.com/premium_photo-1671489203034-fc619a2de3bf?w=800" alt="campo de futbol"></li>
+        <li><img src="https://images.unsplash.com/photo-1610736342165-4eeb4aef66ca?w=800" alt="jugador de futbol"></li>
+        <li><img src="https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=800" alt="disputa de balon"></li>
+        <li><img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=800" alt="celebracion de gol"></li>
+        <li><img src="https://images.unsplash.com/photo-1434648957308-5e6a859697e8?w=800" alt="estadio entero"></li>
+        <li><img src="https://images.unsplash.com/photo-1605002713581-123e77bcf83d?w=800" alt="mural maradona"></li>
+        <li><img src="https://images.unsplash.com/photo-1570498839593-e565b39455fc?w=800" alt="foto del futbol"></li>
+        <li><img src="https://images.unsplash.com/photo-1511426463457-0571e247d816?w=800" alt="botas en el aire"></li>
+        <li><img src="https://images.unsplash.com/photo-1607627000458-210e8d2bdb1d?w=800" alt="jugador bajo los asperzores"></li>
+    </ul>
+
+    <nav class="botonera-marco">
+        <div class="arrow" id="left">&#10094; Izq</div>
+        <a href="#" class="btn" id="first">Inicio</a>
+        <div class="espacio-centro"></div>
+        <a href="#" class="btn" id="last">Fin</a>
+        <div class="arrow" id="right">Der &#10095;</div>
+    </nav>
+</div>
+
+<script>
+const carrusel = document.getElementById('carrusel');
+const imgs = carrusel.querySelectorAll('li img');
+const body = document.body;
+
+let index = 0;
+
+const colors = ["#ffb3b3","#5a3232","#1f1d1d","#1a0202","#2ddd09","#31c7bf","#1316a5","#ac16c088","#ac14ac","#cccccc"];
+
+function updateBackground() {
+    body.style.background = colors[index];
+}
+
+document.getElementById('left').addEventListener('click', () => {
+    index = Math.max(0, index - 1);
+    imgs[index].scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
+    updateBackground();
+});
+
+document.getElementById('right').addEventListener('click', () => {
+    index = Math.min(imgs.length -1, index + 1);
+    imgs[index].scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
+    updateBackground();
+});
+
+document.getElementById('first').addEventListener('click', (e)=>{
+    e.preventDefault();
+    index = 0;
+    imgs[index].scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
+    updateBackground();
+});
+
+document.getElementById('last').addEventListener('click', (e)=>{
+    e.preventDefault();
+    index = imgs.length -1;
+    imgs[index].scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
+    updateBackground();
+});
+
+updateBackground();
+</script>
+
+</body>
+</html>
